@@ -4,13 +4,12 @@ all: build
 PLATFORM=local
 
 build:
-	@docker build --target bin \
-	--output bin/ \
-	--platform ${PLATFORM} .
+	@docker build . --target bin \
+		--output bin/ \
+		--platform ${PLATFORM}
 
 test:
 	@docker build . --target unit-test
 
 clean:
-	rm ./bin/*
-	rmdir bin
+	rm -rf ./bin

@@ -14,12 +14,12 @@ FROM base as unit-test
 RUN go test -v .
 
 FROM scratch AS bin-unix
-COPY --from=base /out/server /
+COPY --from=build /out/server /
 
 FROM bin-unix AS bin-linux
 FROM bin-unix AS bin-darwin
 
 FROM scratch AS bin-windows
-COPY --from=base /out/server /server.exe
+COPY --from=build /out/server /server.exe
 
 FROM bin-${TARGETOS} AS bin
